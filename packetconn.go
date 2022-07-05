@@ -8,8 +8,6 @@ import (
 	"github.com/gofrs/uuid"
 )
 
-type PacketConnContext struct {
-	id         uuid.UUID
 	metadata   *C.Metadata
 	packetConn net.PacketConn
 }
@@ -18,7 +16,6 @@ func NewPacketConnContext(metadata *C.Metadata) *PacketConnContext {
 	id, _ := uuid.NewV4()
 	return &PacketConnContext{
 		id:       id,
-		metadata: metadata,
 	}
 }
 
@@ -39,5 +36,3 @@ func (pc *PacketConnContext) PacketConn() net.PacketConn {
 
 // InjectPacketConn injectPacketConn manually
 func (pc *PacketConnContext) InjectPacketConn(pconn C.PacketConn) {
-	pc.packetConn = pconn
-}
